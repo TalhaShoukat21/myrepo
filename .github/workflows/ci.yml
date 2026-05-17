@@ -1,0 +1,24 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install build-essential
+      run: sudo apt-get update && sudo apt-get install -y build-essential
+
+    - name: Compile C++ code
+      run: g++ -std=c++17 main.cpp -o main
+
+    - name: Run program
+      run: ./main
